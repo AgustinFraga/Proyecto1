@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form #personaForm="ngForm" (ngSubmit)="addPersona(personaForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="personaService.selectedPersona._id">
+            <div class="row">
+              <div class="input-field col-s12">
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="personaService.selectedPersona.name" placeholder="Ingrese el nombre completo">
+              </div>
+              <div class="input-field col-s12">
+                <input type="text" name="position" #name="ngModel" [(ngModel)]="personaService.selectedPersona.position" placeholder="Ingrese su CUIT">
+              </div>
+              <div class="input-field col-s12">
+                <input type="text" name="office" #name="ngModel" [(ngModel)]="personaService.selectedPersona.office" placeholder="Ingrese su direccion">
+              </div>
+              <div class="input-field col-s12">
+                <input type="text" name="salary" #name="ngModel" [(ngModel)]="personaService.selectedPersona.salary" placeholder="Ingrese su puesto">
+              </div>
+              <div class="card-action">
+                <div class="input-field col-s12">
+                  <button class="btn right" style="margin-left: 2px;" (click)="resetForm(personaForm)">Borrar</button>
+                  <button class="btn right">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table class="striped highlight black-text">
+        <thead>
+          <th>NOMBRE</th>
+          <th>CUIT</th>
+          <th>DIRECCION</th>
+          <th>PUESTO</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let persona of personaService.personas">
+            <td>{{ persona.name }}</td>
+            <td>{{ persona.position }}</td>
+            <td>{{ persona.office }}</td>
+            <td>
+              <a (click)="editPersona(persona)">
+                <i class="material-icons">edit</i>
+              </a>
+              <a (click)="deletePersona(persona._id, personaForm)">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
